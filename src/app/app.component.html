@@ -1,20 +1,61 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+      <a (click)="loadevents()"> loadevents</a>
+      <p>Display event : {{displayEvent | json}}</p>
+      <div *ngIf="calendarOptions">
+          <ng-fullcalendar href="#myModal" id="ucCalendar" #ucCalendar [options]="calendarOptions" data-toggle="modal" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+              (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail, ucCalendar)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+      </div>
+  </div>
+  <div class="col-md-3"></div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+
+
+
+<!-- Button HTML (to Trigger Modal) -->
+<a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">
+  <span class="glyphicon glyphicon-trash"></span>
+</a>
+
+<!-- Modal HTML -->
+<div id="myModal" #modal class="modal fade"><!--Se concatena id de la publicacion para poder generar un modal unico por elemento, seto se puede evitar de mejor manera-->
+<div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Agendar Hora</h4>
+      </div>
+      <div class="modal-body">
+          <p *ngIf="eventoNuevo">Fecha: {{eventoNuevo.date.format('LLLL')}}</p>
+          <p class="text-warning"><small>Cuidado con esta opción.</small></p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Borrar la publicación</button>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Model Title</h4>
+    </div>
+    <div class="modal-body">
+      <p>Model body text</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
