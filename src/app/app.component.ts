@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-import { EventSesrvice } from './event.service';
+//import { EventSesrvice } from './event.service';
 
 
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit  {
   public isModalOpen:boolean = true;
   public display:string = 'none';
 
-  constructor(protected eventService: EventSesrvice) { }
+  constructor(/*protected eventService: EventSesrvice*/) { }
 
   ngOnInit() {
     this.calendarOptions = {
@@ -35,11 +35,11 @@ export class AppComponent implements OnInit  {
       events: []
     };
   }
-  loadevents() {
+ /* loadevents() {
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
     });
-  }
+  }*/
   clickButton(model: any) {
     this.displayEvent = model;
   }
