@@ -4,7 +4,7 @@
       <a (click)="loadevents()"> loadevents</a>
       <p>Display event : {{displayEvent | json}}</p>
       <div *ngIf="calendarOptions">
-          <ng-fullcalendar href="#myModal" id="ucCalendar" #ucCalendar [options]="calendarOptions" data-toggle="modal" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+          <ng-fullcalendar  id="ucCalendar" #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
               (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail, ucCalendar)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
       </div>
   </div>
@@ -15,7 +15,7 @@
 
 
 <!-- Button HTML (to Trigger Modal) -->
-<a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">
+<a href="#myModal" id="btn" #btn role="button" class="btn btn-danger opt" data-toggle="modal">
   <span class="glyphicon glyphicon-trash"></span>
 </a>
 
@@ -39,23 +39,3 @@
 </div>
 </div>
 
-
-
-<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
-<div class="backdrop" [ngStyle]="{'display':display}"></div>
-<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">Model Title</h4>
-    </div>
-    <div class="modal-body">
-      <p>Model body text</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
-    </div>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal !-->

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 //import { EventSesrvice } from './event.service';
@@ -17,35 +17,40 @@ export class AppComponent implements OnInit  {
   events = null;
   public eventoNuevo:any;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild("btn") btn: ElementRef;
   public isModalOpen:boolean = true;
   public display:string = 'none';
+  //public btn:HTMLElement;
 
-  constructor(/*protected eventService: EventSesrvice*/) { }
+  constructor(private renderer: Renderer2/*protected eventService: EventSesrvice*/) { }
 
   ngOnInit() {
     this.calendarOptions = {
       editable: true,
       eventLimit: false,
+      defaultView: 'agendaWeek',
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
+        right: 'agendaWeek,agendaDay,listMonth'
       },
       locale: 'es',
       events: []
     };
+    //this.btn = document.getElementById('btn') as HTMLElement;
   }
- /* loadevents() {
-    this.eventService.getEvents().subscribe(data => {
+  loadevents() {
+   /* this.eventService.getEvents().subscribe(data => {
       this.events = data;
     });
-  }*/
+    */
+  }
   clickButton(model: any) {
     this.displayEvent = model;
   }
   dayClick(model: any, ucCalendar:CalendarComponent) {
     this.eventoNuevo = model;
-
+    this.renderer.selectRootElement(this.btn.nativeElement).click();
 
   }
 
